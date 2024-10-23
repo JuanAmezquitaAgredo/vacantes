@@ -1,7 +1,5 @@
 "use client"
-import Modal from "@/components/atoms/modal/modal";
-import FormEmp from "@/components/molecules/formEmp/formEmp";
-import FormVac from "@/components/molecules/formVac/formVac";
+import Layout from "@/components/layouts/layout";
 import React, { useState } from "react";
 
 export default function Home() {
@@ -15,18 +13,12 @@ export default function Home() {
   const toggleModalVac = () => {
     setModalOpenVac(!ModalOpenVac);
   };
-  
+
   return (
-    <div>
-      <h1>home</h1>
-      <button onClick={toggleModalEmp}>Empresa</button>
-      <button onClick={toggleModalVac}>Vacantes</button>
-      <Modal isOpen={ModalOpenEmp} onClose={toggleModalEmp} title="Agregar Compañía">
-        <FormEmp/>
-      </Modal>
-      <Modal isOpen={ModalOpenVac} onClose={toggleModalVac} title="Agregar Vacante">
-        <FormVac/>
-      </Modal>
-    </div>
+    <>
+      <Layout title="Panel de administración">
+        <h1>hola</h1>
+      </Layout>
+    </>
   );
 }
