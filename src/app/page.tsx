@@ -1,5 +1,6 @@
 "use client"
 import Layout from "@/components/layouts/layout";
+import HeaderPage from "@/components/organisms/headerPage/headerPage";
 import React, { useState } from "react";
 
 export default function Home() {
@@ -17,7 +18,7 @@ export default function Home() {
   return (
     <>
       <Layout title="Panel de administración">
-        <h1>hola</h1>
+        <HeaderPage label="Agregar Vacante" onClick={toggleModalEmp} color="primary" hoverColor="primary" title="Vacantes"/>
       </Layout>
     </>
   );
