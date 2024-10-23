@@ -14,8 +14,7 @@ interface InputFieldProps{
 const StyledInputField = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: 0.2rem;
 
 `;
 export default function InputField({ type, onChange, name, value, focusColor, label}: InputFieldProps){

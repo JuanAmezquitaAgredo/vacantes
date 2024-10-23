@@ -21,6 +21,7 @@ const StyledButton = styled.button<{ color: 'primary' | 'secondary', hoverColor:
     background-color: ${(props) => colors[props.color]};
     color: white;
     border-radius: 5px;
+    padding: 8px 16px;
     &:hover {
         background-color: ${(props) => hoverColors[props.hoverColor]};
     }

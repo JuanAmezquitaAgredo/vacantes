@@ -15,16 +15,16 @@ const colors = {
 };
 
 const StyledInput = styled.input<{ focusColor: 'primary' | 'secondary' }>`
+    width: 100%;
     background-color: rgb(255, 255, 255);
-    border: solid 1px rgb(229, 231, 235);
+    border: solid 2px rgb(229, 231, 235);
     border-radius: 5px;
-    padding: 8px;
+    padding: 5px;
 
     // Cambio del borde en focus
     &:focus {
-        outline: none;
         border-color: ${(props) => colors[props.focusColor]};
-        box-shadow: 0 0 5px ${(props) => colors[props.focusColor]};
+        outline: 2px solid rgb(229, 231, 235);
     }
 `;
 

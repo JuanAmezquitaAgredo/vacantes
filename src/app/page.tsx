@@ -1,25 +1,32 @@
 "use client"
-import SelectComponent from "@/components/atoms/select/select";
+import Modal from "@/components/atoms/modal/modal";
+import FormEmp from "@/components/molecules/formEmp/formEmp";
+import FormVac from "@/components/molecules/formVac/formVac";
 import React, { useState } from "react";
 
 export default function Home() {
-  const [selectedValue, setSelectedValue] = useState("");
+  const [ModalOpenEmp, setModalOpenEmp] = useState(false);
+  const [ModalOpenVac, setModalOpenVac] = useState(false);
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedValue(event.target.value);
+  const toggleModalEmp = () => {
+    setModalOpenEmp(!ModalOpenEmp);
   };
 
-  const options = [
-    { value: 'Option 1', label: 'Option 1' },
-    { value: 'Option 2', label: 'Option 2' },
-    { value: 'Option 3', label: 'Option 3' },
-    { value: 'Option 4', label: 'Option 4' },
-    { value: 'Option 5', label: 'Option 5' },
-  ]
+  const toggleModalVac = () => {
+    setModalOpenVac(!ModalOpenVac);
+  };
+  
   return (
     <div>
       <h1>home</h1>
-      <SelectComponent options={options} value={selectedValue} onChange={handleSelectChange} placeholder="--Select--" focusColor="primary"/>
+      <button onClick={toggleModalEmp}>Empresa</button>
+      <button onClick={toggleModalVac}>Vacantes</button>
+      <Modal isOpen={ModalOpenEmp} onClose={toggleModalEmp} title="Agregar Compañía">
+        <FormEmp/>
+      </Modal>
+      <Modal isOpen={ModalOpenVac} onClose={toggleModalVac} title="Agregar Vacante">
+        <FormVac/>
+      </Modal>
     </div>
   );
 }

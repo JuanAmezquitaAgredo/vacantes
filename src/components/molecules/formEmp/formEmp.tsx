@@ -1,41 +1,38 @@
-import { title } from "process";
 import InputField from "../inputField/inputField";
 import ButtonComponent from "@/components/atoms/button/button";
 import { useState } from "react";
-import SelectComponent from "@/components/atoms/select/select";
+import styled from "styled-components";
 
-export default function FormVacant() {
-    const [title, setTitle] = useState<string>("");
-    const [description, setDescription] = useState<string>("");
-    const [selectedValue, setSelectedValue] = useState("");
+const StyledForm = styled.form`
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0.5rem;
+`;
+export default function FormEmp() {
+    const [Name, setName] = useState<string>("");
+    const [location, setlocation] = useState<string>("");
+    const [contact, setcontact] = useState<string>("");
 
-    const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedValue(event.target.value);
-    };
-
-    const options = [
-        { value: 'Full Stack Developer', label: 'Full Stack Developer' },
-        { value: 'Frontend Developer', label: 'Frontend Developer' },
-        { value: 'Backend Developer', label: 'Backend Developer' },
-        { value: 'UI/UX Designer', label: 'UI/UX Designer' },
-    ]
+    
     const handleAdd = async (): Promise<void> => {
         try {
             // Aquí se conectaría a la API para agregar una vacante
-            console.log('Agregando vacante:', title);
+            console.log('Agregando vacante:', Name);
         } catch (error) {
             console.error('Error agregando vacante:', error);
         } finally {
-            setTitle('');
+            setName('');
         }
     }
 
     return (
-        <div>
-            <InputField type="text" onChange={(e) => setTitle(e.target.value)} name="title" value={title} focusColor="secondary" label="Título" />
-            <InputField type="text-area" onChange={(e) => setDescription(e.target.value)} name="description" value={description} focusColor="secondary" label="Descripción" />
-            <SelectComponent options={options} value={selectedValue} onChange={handleSelectChange} placeholder="--Select--" focusColor="secondary" />
+        <StyledForm>
+            <InputField type="text" onChange={(e) => setName(e.target.value)} name="name" value={Name} focusColor="secondary" label="Nombre" />
+            <InputField type="text" onChange={(e) => setlocation(e.target.value)} name="location" value={location} focusColor="secondary" label="Ubicación" />
+            <InputField type="text" onChange={(e) => setcontact(e.target.value)} name="contact" value={contact} focusColor="secondary" label="Contacto" />
             <ButtonComponent label="Agregar" onClick={(e) => handleAdd()} color="secondary" hoverColor="secondary" />
-        </div>
+        </StyledForm>
     );
 }
