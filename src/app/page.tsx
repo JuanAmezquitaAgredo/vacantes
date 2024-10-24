@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <>
       <HeaderPage label="Agregar Vacante" onClick={toggleModalVac} color="primary" hoverColor="primary" title="Vacantes" />
-      <Modal isOpen={ModalOpenVac} onClose={toggleModalVac} title="Agregar Compañia">
+      <Modal isOpen={ModalOpenVac} onClose={toggleModalVac} title="Agregar Vacante">
         <FormVac/>
       </Modal>
     </>
