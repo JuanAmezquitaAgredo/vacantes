@@ -1,9 +1,5 @@
 import styled from "styled-components"
 
-interface IHeader{
-    title: string;
-}
-
 const StyleTitle = styled.h1`
     color: rgb(31, 41, 55);
     font-weight: bold;
@@ -14,9 +10,9 @@ const StyleTitle = styled.h1`
     font-size: 2rem;
     background-color: : rgb(255, 255, 255);
 `;
-export default function HeaderComponent({title}:IHeader){
+export default function HeaderComponent(){
 
     return(
-        <StyleTitle>{title}</StyleTitle>
+        <StyleTitle>Panel de Administración</StyleTitle>
     )
 }

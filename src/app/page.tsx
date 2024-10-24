@@ -1,15 +1,11 @@
 "use client"
-import Layout from "@/components/layouts/layout";
+import Modal from "@/components/atoms/modal/modal";
+import FormVac from "@/components/molecules/formVac/formVac";
 import HeaderPage from "@/components/organisms/headerPage/headerPage";
 import React, { useState } from "react";
 
 export default function Home() {
-  const [ModalOpenEmp, setModalOpenEmp] = useState(false);
   const [ModalOpenVac, setModalOpenVac] = useState(false);
-
-  const toggleModalEmp = () => {
-    setModalOpenEmp(!ModalOpenEmp);
-  };
 
   const toggleModalVac = () => {
     setModalOpenVac(!ModalOpenVac);
@@ -17,9 +13,10 @@ export default function Home() {
 
   return (
     <>
-      <Layout title="Panel de administración">
-        <HeaderPage label="Agregar Vacante" onClick={toggleModalEmp} color="primary" hoverColor="primary" title="Vacantes"/>
-      </Layout>
+      <HeaderPage label="Agregar Vacante" onClick={toggleModalVac} color="primary" hoverColor="primary" title="Vacantes" />
+      <Modal isOpen={ModalOpenVac} onClose={toggleModalVac} title="Agregar Compañia">
+        <FormVac/>
+      </Modal>
     </>
   );
 }

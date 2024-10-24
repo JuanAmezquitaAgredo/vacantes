@@ -1,9 +1,9 @@
+'use client'
 import styled from "styled-components";
 import HeaderComponent from "../organisms/header/header";
 import { NavbarComponent } from "../organisms/navbar/navbar";
 
 interface ILayout{
-    title: string;
     children: React.ReactNode;
 }
 
@@ -18,10 +18,10 @@ const StylesLayout = styled.div`
     gap: 2em;
 `;
 
-export default function Layout({ title, children }: ILayout) {
+export default function Layout({ children }: ILayout) {
     return(
         <StylesLayout>
-            <HeaderComponent title={title}/>
+            <HeaderComponent/>
             <NavbarComponent/>
             {children}
         </StylesLayout>

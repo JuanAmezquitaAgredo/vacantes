@@ -1,3 +1,5 @@
+'use client'
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -36,11 +38,18 @@ const SwitchButton = styled.button<{ isActive: boolean; isLeft: boolean }>`
 
 export default function SwitchComponent({ options, onChange }: SwitchProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const router = useRouter();
 
   const handleClick = (index: number) => {
     setSelectedIndex(index);
     onChange(index);
   };
+
+  if(selectedIndex === 0){
+    router.push('/');
+  } else if(selectedIndex === 1){
+    router.push('/companies');
+  }
   
   return (
     <SwitchContainer>
