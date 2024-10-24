@@ -35,6 +35,7 @@ const ButtonEdit = styled.button<{ color: 'primary' | 'secondary', hoverColor: '
     margin-right: 5px;
     &:hover {
         color: ${(props) => hoverColors[props.hoverColor]};
+        background-color: rgb(243, 244, 246);
     }
 `;
 
