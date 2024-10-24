@@ -1,8 +1,8 @@
 "use client"
 import Modal from '@/components/atoms/modal/modal';
-import CardCompComponents from '@/components/molecules/cardCom/cardCom';
 import FormEmp from '@/components/molecules/formEmp/formEmp';
 import HeaderPage from '@/components/organisms/headerPage/headerPage'
+import SectionCardComp from '@/components/organisms/sectionCardsComp/sectionCardsComp';
 import React, { useState } from 'react'
 
 export default function CompaniesPage() {
@@ -12,18 +12,10 @@ export default function CompaniesPage() {
     setModalOpenEmp(!ModalOpenEmp);
   }
 
-  const handleEdit = () => {
-    console.log('Editar');
-  }
-  
-  const handleDelete = () => {
-    console.log('Borrar');
-  }
-
   return (
     <>
       <HeaderPage label="Agregar Compañia" onClick={toggleModalEmp} color="secondary" hoverColor="secondary" title="Compañias" />
-      <CardCompComponents title="Techcorp" location="Ciudad de mexico" contact="555-1010" onClickEdit={handleEdit} onClickDelete={handleDelete}/>
+      <SectionCardComp/>
       <Modal isOpen={ModalOpenEmp} onClose={toggleModalEmp} title="Agregar Compañia">
         <FormEmp/>
       </Modal>
