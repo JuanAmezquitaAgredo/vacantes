@@ -14,7 +14,7 @@ const StylesLayout = styled.div`
     min-height: 98vh;
     background-color: var(--background);
     border-radius: 10px;
-    padding: 1em;
+    padding: 2em;
     gap: 2em;
 `;
 
