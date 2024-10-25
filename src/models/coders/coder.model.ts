@@ -22,7 +22,7 @@ export interface IPageable{
 export interface ICompanies {
   content: ICompany[];
   pageable: IPageable;
-  totalPage: number;
+  totalPages: number;
   totalElements: number;
   last: boolean;
   numberOfElements: number;
@@ -35,6 +35,11 @@ export interface ICompanies {
   };
   first: boolean;
   empty: boolean;
+}
+
+export interface IGetCompanyRequest{
+  page: number;
+  size: number;
 }
 
 export interface IVacancyResponse{
