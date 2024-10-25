@@ -22,7 +22,7 @@ const StylesButtonsCard = styled.div`
     width: 100%;
     display: flex;
     justify-content: end;
-    margin-top: 10px;
+    margin-top: 35px;
 `;
 
 const ButtonEdit = styled.button<{ color: 'primary' | 'secondary', hoverColor: 'primary' | 'secondary' }>`

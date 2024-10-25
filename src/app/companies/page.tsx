@@ -1,24 +1,19 @@
-"use client"
-import Modal from '@/components/atoms/modal/modal';
-import FormEmp from '@/components/molecules/formEmp/formEmp';
-import HeaderPage from '@/components/organisms/headerPage/headerPage'
 import SectionCardComp from '@/components/organisms/sectionCardsComp/sectionCardsComp';
-import React, { useState } from 'react'
+import CompaniesTemplate from '@/components/templates/companiesPage/companiesPage';
+import { CompaniesService } from '@/services/coders.service';
+import React from 'react'
 
-export default function CompaniesPage() {
-  const [ModalOpenEmp, setModalOpenEmp] = useState(false);
+const useCompaniesServices = new CompaniesService();
+export default async function CompaniesPage() {
 
-  const toggleModalEmp = () => {
-    setModalOpenEmp(!ModalOpenEmp);
-  }
+  const response = await useCompaniesServices.findAll();
+  const companies = response.content;
+ 
 
   return (
     <>
-      <HeaderPage label="Agregar Compañia" onClick={toggleModalEmp} color="secondary" hoverColor="secondary" title="Compañias" />
-      <SectionCardComp/>
-      <Modal isOpen={ModalOpenEmp} onClose={toggleModalEmp} title="Agregar Compañia">
-        <FormEmp/>
-      </Modal>
+      <CompaniesTemplate/>
+      <SectionCardComp data={companies}/>
     </>
   )
-}
+};

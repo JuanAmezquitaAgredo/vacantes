@@ -13,8 +13,8 @@ interface ICardProps{
 const Card = styled.div`
     display: flex;
     flex-direction: column;
-    width: 320px;
-    height: 146px;
+    width: 370px;
+    height: 180px;
     padding: 15px;
     border: solid rgb(229, 231, 235) 1px;
     border-radius: 10px;
