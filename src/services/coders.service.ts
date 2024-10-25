@@ -1,4 +1,4 @@
-import { ICompanies, ICompany, IGetCompanyRequest, IVacancy, IVacancyResponse } from "@/models/coders/coder.model";
+import { ICompanies, IGetCompanyRequest, IGetVacanciesRequest, IVacancy, IVacancyResponse } from "@/models/coders/coder.model";
 import { HttpClient } from "@/utils/client-http";
 
 export class  Service {
@@ -19,9 +19,9 @@ export class  Service {
     }
   }
 
-  async allVacants() {
+  async allVacants({page, size}: IGetVacanciesRequest) {
     try {
-      const response = this.httpClient.get<IVacancyResponse>("vacants?page=1&size=6");
+      const response = this.httpClient.get<IVacancyResponse>(`vacants?page=${page}&size=${size}`);
 
       return response;
     } catch (error) {

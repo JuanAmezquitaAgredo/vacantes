@@ -1,13 +1,15 @@
 'use client'
 import ButtonPag from "@/components/atoms/buttonPag/buttonPag";
 import CardVacComponents from "@/components/molecules/cardVac/cardVac";
-import { IVacancy } from "@/models/coders/coder.model";
+import { IPageable, IVacancyResponse } from "@/models/coders/coder.model";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { useState } from "react";
 import styled from "styled-components";
 
 interface CardProps {
-    data: IVacancy[];
+    data: IVacancyResponse;
+    pagination: IPageable;
 }
 
 const SectionVac = styled.div`
@@ -36,16 +38,25 @@ const Pagination = styled.div`
     align-items: center;
 `;
 
-export default function SectionCardCav({ data }: CardProps) {
+export default function SectionCardCav({ data, pagination }: CardProps) {
 
-    const [currentPage, setCurrentPage] = useState(1);
+    const searchParams = useSearchParams();
+    const router = useRouter();
 
-    const HandleClickNext = () => {
-        setCurrentPage(currentPage + 1);
+    const HandleClickNext = (nextPage: number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        if (nextPage <= data.totalPages) {
+            params.set('page', nextPage.toString());
+            router.push(`?${params.toString()}`);
+        }
     };
 
-    const HandleClickBack = () => {
-        setCurrentPage(currentPage - 1);
+    const HandleClickBack = (backPage: number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        if (backPage > 0) {
+            params.set('page', backPage.toString());
+            router.push(`?${params.toString()}`);
+        }
     };
 
     const handleEdit = () => {
@@ -56,10 +67,12 @@ export default function SectionCardCav({ data }: CardProps) {
         console.log('Borrar');
     };
 
+    const courrentPage = pagination.pageNumber + 1;
+
     return (
         <SectionVac>
             <Cards>
-                {data.slice(0, 6).map((vacant) => (
+                {data.content.map((vacant) => (
                     <CardVacComponents
                         key={vacant.id}
                         title={vacant.title}
@@ -72,9 +85,9 @@ export default function SectionCardCav({ data }: CardProps) {
                 ))}
             </Cards>
             <Pagination>
-                <ButtonPag label="<" onClick={HandleClickBack} />
-                pagina 1 de 2
-                <ButtonPag label=">" onClick={HandleClickNext} />
+            <ButtonPag label="<" onClick={() => HandleClickBack(courrentPage - 1)} />
+                Página {courrentPage} de {data.totalPages}
+                <ButtonPag label=">" onClick={() => HandleClickNext(courrentPage + 1)} />
             </Pagination>
         </SectionVac>
     );

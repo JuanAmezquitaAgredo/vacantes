@@ -42,6 +42,11 @@ export interface IGetCompanyRequest{
   size: number;
 }
 
+export interface IGetVacanciesRequest{
+  page: number;
+  size: number;
+}
+
 export interface IVacancyResponse{
   content: IVacancy[]
   pageable: IPageable
