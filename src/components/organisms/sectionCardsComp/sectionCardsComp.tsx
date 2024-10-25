@@ -1,9 +1,8 @@
 'use client'
 import ButtonPag from "@/components/atoms/buttonPag/buttonPag";
 import CardCompComponents from "@/components/molecules/cardCom/cardCom";
-import { ICompanies, ICompany, IPageable } from "@/models/coders/coder.model";
+import { ICompanies, IPageable } from "@/models/coders/coder.model";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
 import styled from "styled-components";
 
 interface CardProps {
