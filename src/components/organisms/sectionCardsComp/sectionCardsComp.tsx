@@ -45,14 +45,18 @@ export default function SectionCardComp({ data , pagination}: CardProps) {
 
     const HandleClickNext = (nextPage: number) => {
         const params = new URLSearchParams(searchParams.toString());
-        params.set('page', nextPage.toString());
-        router.push(`?${params.toString()}`);
+        if (nextPage <= data.totalPages) {
+            params.set('page', nextPage.toString());
+            router.push(`?${params.toString()}`);
+        }
     };
 
     const HandleClickBack = (backPage: number) => {
         const params = new URLSearchParams(searchParams.toString());
-        params.set('page', backPage.toString());
-        router.push(`?${params.toString()}`);
+        if (backPage > 0) {
+            params.set('page', backPage.toString());
+            router.push(`?${params.toString()}`);
+        }
     };
 
     const handleEdit = () => {
