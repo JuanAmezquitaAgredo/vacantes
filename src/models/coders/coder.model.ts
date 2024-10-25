@@ -28,12 +28,38 @@ export interface ICompanies {
   numberOfElements: number;
   size: number;
   number: number;
-  sort: {};
+  sort: {
+    sorted: boolean;
+    unsorted: boolean;
+    empty: boolean
+  };
   first: boolean;
   empty: boolean;
 }
 
-export interface ICreateCoder {
-  name: string;
-  avatar: string;
+export interface IVacancyResponse{
+  content: IVacancy[]
+  pageable: IPageable
+  totalPages: number
+  totalElements: number
+  last: boolean
+  numberOfElements: number
+  size: number
+  number: number
+  sort: {
+    sorted: boolean;
+    unsorted: boolean;
+    empty: boolean
+  };
+  first: boolean
+  empty: boolean
 }
+
+export interface IVacancy {
+  id: number
+  title: string
+  description: string
+  status: string
+  company: ICompany
+}
+

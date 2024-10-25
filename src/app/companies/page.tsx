@@ -1,12 +1,12 @@
 import SectionCardComp from '@/components/organisms/sectionCardsComp/sectionCardsComp';
-import CompaniesTemplate from '@/components/templates/companiesPage/companiesPage';
-import { CompaniesService } from '@/services/coders.service';
+import CompaniesTemplate from '@/components/templates/companiesTemplate/companiesTemplate';
+import { Service } from '@/services/coders.service';
 import React from 'react'
 
-const useCompaniesServices = new CompaniesService();
+const useCompaniesServices = new Service();
 export default async function CompaniesPage() {
 
-  const response = await useCompaniesServices.findAll();
+  const response = await useCompaniesServices.allCompanies();
   const companies = response.content;
  
 

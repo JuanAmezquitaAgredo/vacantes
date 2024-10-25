@@ -31,6 +31,7 @@ const Contact = styled.p`
 
 
 export default function InfoCardComp({title, location, contact}: InfoCardProps ){
+
     return(
         <StylesInfoCard>
             <Title>{title}</Title>

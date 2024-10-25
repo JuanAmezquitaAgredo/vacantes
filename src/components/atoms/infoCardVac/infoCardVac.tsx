@@ -36,13 +36,21 @@ const Company = styled.p`
     margin-top: 0.5rem;
 `;
 
-export default function InfoCard({title, description, status, company}: InfoCardProps ){
-    return(
+export default function InfoCard({ title, description, status, company }: InfoCardProps) {
+    const limitDescription = (text: string, wordLimit: number) => {
+        const words = text.split(" ");
+        if (words.length > wordLimit) {
+            return words.slice(0, wordLimit).join(" ") + "...";
+        }
+        return text;
+    };
+
+    return (
         <StylesInfoCard>
             <Title>{title}</Title>
-            <Description>{description}</Description>
+            <Description>{limitDescription(description, 6)}</Description>
             <Status>Estado: {status}</Status>
-            <Company>Compañia: {company}</Company>
+            <Company>Compañía: {company}</Company>
         </StylesInfoCard>
-    )
+    );
 }

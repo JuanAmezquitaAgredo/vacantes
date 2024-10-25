@@ -1,8 +1,14 @@
+'use client'
 import ButtonPag from "@/components/atoms/buttonPag/buttonPag";
 import CardVacComponents from "@/components/molecules/cardVac/cardVac";
+import { IVacancy } from "@/models/coders/coder.model";
 
 import { useState } from "react";
 import styled from "styled-components";
+
+interface CardProps {
+    data: IVacancy[];
+}
 
 const SectionVac = styled.div`
     width: 100%;
@@ -16,6 +22,11 @@ const SectionVac = styled.div`
 const Cards = styled.div`
     width: 100%;
     height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    grid-template-rows: auto;
+    justify-items: center;
+    align-items: start;
 `;
 
 const Pagination = styled.div`
@@ -25,7 +36,7 @@ const Pagination = styled.div`
     align-items: center;
 `;
 
-export default function SectionCardCav() {
+export default function SectionCardCav({ data }: CardProps) {
 
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -48,7 +59,17 @@ export default function SectionCardCav() {
     return (
         <SectionVac>
             <Cards>
-            <CardVacComponents title='Desarrollador frontend' description='busca desarrollador con experiencia en react' status='OPEN' company='TechCorp' onClickEdit={handleEdit} onClickDelete={handleDelete}/>
+                {data.slice(0, 6).map((vacant) => (
+                    <CardVacComponents
+                        key={vacant.id}
+                        title={vacant.title}
+                        description={vacant.description}
+                        status={vacant.status}
+                        company={vacant.company.name}
+                        onClickEdit={handleEdit}
+                        onClickDelete={handleDelete}
+                    />
+                ))}
             </Cards>
             <Pagination>
                 <ButtonPag label="<" onClick={HandleClickBack} />

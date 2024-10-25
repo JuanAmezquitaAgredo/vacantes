@@ -1,24 +1,18 @@
-"use client"
-import Modal from "@/components/atoms/modal/modal";
 import SectionCardCav from "@/components/organisms/sectionCardsVac/sectionCardsVac";
-import FormVac from "@/components/molecules/formVac/formVac";
-import HeaderPage from "@/components/organisms/headerPage/headerPage";
-import React, { useState } from "react";
+import VacantsTemplate from "@/components/templates/vacantsTemplate/vacantsTemplate";
+import { Service } from "@/services/coders.service";
+import React from "react";
 
-export default function Home() {
-  const [ModalOpenVac, setModalOpenVac] = useState(false);
+const usevacantsServices = new Service();
+export default async function Home() {
 
-  const toggleModalVac = () => {
-    setModalOpenVac(!ModalOpenVac);
-  };
+  const response = await usevacantsServices.allVacants();
+  const vacancies = response.content;
 
   return (
     <>
-      <HeaderPage label="Agregar Vacante" onClick={toggleModalVac} color="primary" hoverColor="primary" title="Vacantes" />
-      <SectionCardCav />
-      <Modal isOpen={ModalOpenVac} onClose={toggleModalVac} title="Agregar Vacante">
-        <FormVac/>
-      </Modal>
+      <VacantsTemplate/>    
+      <SectionCardCav data={vacancies}/>
     </>
   );
 }

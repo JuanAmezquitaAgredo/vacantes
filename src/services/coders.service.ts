@@ -1,16 +1,27 @@
-import { ICompanies, ICompany } from "@/models/coders/coder.model";
+import { ICompanies, ICompany, IVacancy, IVacancyResponse } from "@/models/coders/coder.model";
 import { HttpClient } from "@/utils/client-http";
 
-export class CompaniesService {
+export class  Service {
   private httpClient: HttpClient;
 
   constructor() {
     this.httpClient = new HttpClient();
   }
 
-  async findAll() {
+  async allCompanies() {
     try {
       const response = this.httpClient.get<ICompanies>("company?page=1&size=3");
+
+      return response;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  async allVacants() {
+    try {
+      const response = this.httpClient.get<IVacancyResponse>("vacants?page=1&size=6");
 
       return response;
     } catch (error) {
