@@ -11,7 +11,6 @@ const usevacantsServices = new Service();
 export default async function Home({searchParams}: Iprops) {
   const page = searchParams.page? parseInt(searchParams.page.toString()) : 1;
   const response = await usevacantsServices.allVacants({ page, size: 6 });
-  const vacancies = response.content;
 
   return (
     <>
