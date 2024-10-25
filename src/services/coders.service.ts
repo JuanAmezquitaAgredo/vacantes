@@ -1,4 +1,4 @@
-import { ICompanies, IGetCompanyRequest, IGetVacanciesRequest, IVacancy, IVacancyResponse } from "@/models/coders/coder.model";
+import { ICompanies, IGetCompanyRequest, IGetVacanciesRequest, IVacancy, IVacancyResponse } from "@/models/modelsProgram/program.model";
 import { HttpClient } from "@/utils/client-http";
 
 export class  Service {

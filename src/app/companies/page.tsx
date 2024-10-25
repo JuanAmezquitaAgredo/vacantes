@@ -1,6 +1,6 @@
 import SectionCardComp from '@/components/organisms/sectionCardsComp/sectionCardsComp';
 import CompaniesTemplate from '@/components/templates/companiesTemplate/companiesTemplate';
-import { IGetCompanyRequest } from '@/models/coders/coder.model';
+import { IGetCompanyRequest } from '@/models/modelsProgram/program.model';
 import { Service } from '@/services/coders.service';
 import React from 'react'
 

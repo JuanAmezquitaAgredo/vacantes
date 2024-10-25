@@ -1,7 +1,7 @@
 'use client'
 import ButtonPag from "@/components/atoms/buttonPag/buttonPag";
 import CardCompComponents from "@/components/molecules/cardCom/cardCom";
-import { ICompanies, IPageable } from "@/models/coders/coder.model";
+import { ICompanies, IPageable } from "@/models/modelsProgram/program.model";
 import { useRouter, useSearchParams } from "next/navigation";
 import styled from "styled-components";
 
