@@ -19,7 +19,7 @@ export default function CompaniesTemplate() {
         <Companies>
             <HeaderPage label="Agregar Compañia" onClick={toggleModalEmp} color="secondary" hoverColor="secondary" title="Compañias" />
             <Modal isOpen={ModalOpenEmp} onClose={toggleModalEmp} title="Agregar Compañia">
-                <FormEmp />
+                <FormEmp onClose={toggleModalEmp}/>
             </Modal>
         </Companies>
     )

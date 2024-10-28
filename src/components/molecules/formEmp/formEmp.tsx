@@ -15,7 +15,11 @@ const StyledForm = styled.form`
     margin: 0.5rem;
 `;
 
-export default function FormEmp() {
+interface IFormEmpProps {
+    onClose: () => void;
+}
+
+export default function FormEmp({onClose}:IFormEmpProps){
     const router = useRouter();
     const [company, setCompany] = useState<IPostCompany>({
         name: "",
@@ -30,6 +34,7 @@ export default function FormEmp() {
         try {
             await useServices.createCompany(company);
             alert('Empresa agregada correctamente');
+            onClose();
             router.refresh();
         } catch (error) {
             console.error('Error agregando vacante:', error);

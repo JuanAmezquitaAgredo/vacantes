@@ -19,7 +19,7 @@ export default function VacantsTemplate() {
         <Vacants>
             <HeaderPage label="Agregar Vacante" onClick={toggleModalVac} color="primary" hoverColor="primary" title="Vacantes" />
             <Modal isOpen={ModalOpenVac} onClose={toggleModalVac} title="Agregar Vacante">
-                <FormVac />
+                <FormVac onClose={toggleModalVac} />
             </Modal>
         </Vacants>
     )

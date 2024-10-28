@@ -19,8 +19,13 @@ interface ICompanyOptions{
     value: string;
     label: string;
 }
+
+interface IFormEmpProps {
+    onClose: () => void;
+}
+
 const useCompaniesServices = new Service();
-export default function FormVac() {
+export default function FormVac({onClose}:IFormEmpProps) {
     const router = useRouter();
     const [vacant, setVacant] = useState<IPostVacancy>({
         title: '',
@@ -54,6 +59,7 @@ export default function FormVac() {
         try {
             await useCompaniesServices.createVacant(vacant);
             alert('Vacante agregada correctamente');
+            onClose();
             router.refresh();
         } catch (error) {
             console.error('Error agregando vacante:', error);
