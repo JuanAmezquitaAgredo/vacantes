@@ -1,4 +1,5 @@
-import { ICompanies, IGetCompanyRequest, IGetVacanciesRequest, IVacancy, IVacancyResponse } from "@/models/modelsProgram/program.model";
+import { ICompanies, IGetCompanyRequest, IGetVacanciesRequest, IVacancyResponse } from "@/models/modelsProgram/program.model";
+import { IPostCompany, IPostCompanyResponse } from "@/models/post/post";
 import { HttpClient } from "@/utils/client-http";
 
 export class  Service {
@@ -29,6 +30,16 @@ export class  Service {
       throw error;
     }
   }
+  
+  async createCompany(company: IPostCompany) {
+    try {
+      const createdCompany = await this.httpClient.post<IPostCompanyResponse, IPostCompany>("company", company);
+      return createdCompany;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
 
   // async destroy(id: string) {
   //   try {
@@ -41,15 +52,6 @@ export class  Service {
   //   }
   // }
 
-  // async create(coder: ICreateCoder) {
-  //   try {
-  //     const createdCoder = await this.httpClient.post<ICoder, ICreateCoder>("coders", coder);
-  //     return createdCoder;
-  //   } catch (error) {
-  //     console.log(error);
-  //     throw error;
-  //   }
-  // }
 
   // async update(id: string, coder: ICoder) {
   //   try {

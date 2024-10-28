@@ -23,10 +23,18 @@ const Cards = styled.div`
     width: 100%;
     height: 80vh;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    grid-template-columns: repeat(3, 1fr); 
     grid-template-rows: auto;
     justify-items: center;
     align-items: start;
+
+    @media (max-width: 1300px) {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+
+    @media (max-width: 1000px) {
+        grid-template-columns: 1fr;
+    }
 `;
 
 const Pagination = styled.div`
@@ -66,7 +74,7 @@ export default function SectionCardComp({ data , pagination}: CardProps) {
         console.log('Borrar');
     };
 
-    console.log(data.totalPages);
+    console.log(data);
 
     const courrentPage = pagination.pageNumber + 1;
     return (

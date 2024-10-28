@@ -1,6 +1,10 @@
+'use client'
 import InputField from "../inputField/inputField";
 import ButtonComponent from "@/components/atoms/button/button";
-import { useState } from "react";
+import { IPostCompany } from "@/models/post/post";
+import { Service } from "@/services/coders.service";
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
 import styled from "styled-components";
 
 const StyledForm = styled.form`
@@ -11,28 +15,32 @@ const StyledForm = styled.form`
     margin: 0.5rem;
 `;
 export default function FormEmp() {
-    const [Name, setName] = useState<string>("");
-    const [location, setlocation] = useState<string>("");
-    const [contact, setcontact] = useState<string>("");
+    const [company, setCompany] = useState<IPostCompany>({
+        name: "",
+        location: "",
+        contact: ""
+    });
 
-    
-    const handleAdd = async (): Promise<void> => {
+    const useServices = new Service();
+    const router = useRouter();
+
+    const handleAdd = async (e: FormEvent<Element>) => {
+        e.preventDefault();
         try {
-            // Aquí se conectaría a la API para agregar una vacante
-            console.log('Agregando vacante:', Name);
+            await useServices.createCompany(company);
+            router.push('/companies');
+            alert('Empresa agregada correctamente');
         } catch (error) {
             console.error('Error agregando vacante:', error);
-        } finally {
-            setName('');
         }
     }
 
     return (
         <StyledForm>
-            <InputField type="text" onChange={(e) => setName(e.target.value)} name="name" value={Name} focusColor="secondary" label="Nombre" />
-            <InputField type="text" onChange={(e) => setlocation(e.target.value)} name="location" value={location} focusColor="secondary" label="Ubicación" />
-            <InputField type="text" onChange={(e) => setcontact(e.target.value)} name="contact" value={contact} focusColor="secondary" label="Contacto" />
-            <ButtonComponent label="Agregar" onClick={(e) => handleAdd()} color="secondary" hoverColor="secondary" />
+            <InputField type="text" onChange={(e) => setCompany({ ...company, name: e.target.value })} name="name" value={company.name} focusColor="secondary" label="Nombre" />
+            <InputField type="text" onChange={(e) => setCompany({ ...company, location: e.target.value })} name="location" value={company.location} focusColor="secondary" label="Ubicación" />
+            <InputField type="text" onChange={(e) => setCompany({ ...company, contact: e.target.value })} name="contact" value={company.contact} focusColor="secondary" label="Contacto" />
+            <ButtonComponent label="Agregar" onClick={(e) => handleAdd(e)} color="secondary" hoverColor="secondary" />
         </StyledForm>
     );
 }
