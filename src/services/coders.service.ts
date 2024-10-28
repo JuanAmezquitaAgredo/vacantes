@@ -61,16 +61,15 @@ export class  Service {
     }
   }
 
-  // async destroy(id: string) {
-  //   try {
-  //     const coders = this.httpClient.delete<ICoder>(`coders/${id}`);
-
-  //     return coders;
-  //   } catch (error) {
-  //     console.log(error);
-  //     throw error;
-  //   }
-  // }
+  async deleteCompany(id: string) {
+    try {
+      const company = this.httpClient.delete<ICompany>(`company/${id}`);
+      return company;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
 
 
   // async update(id: string, coder: ICoder) {

@@ -2,6 +2,7 @@
 import ButtonPag from "@/components/atoms/buttonPag/buttonPag";
 import CardCompComponents from "@/components/molecules/cardCom/cardCom";
 import { ICompanies, IPageable } from "@/models/modelsProgram/program.model";
+import { Service } from "@/services/coders.service";
 import { useRouter, useSearchParams } from "next/navigation";
 import styled from "styled-components";
 
@@ -45,6 +46,7 @@ const Pagination = styled.div`
     margin-top: 16px;
 `;
 
+const useServices = new Service();
 export default function SectionCardComp({ data , pagination}: CardProps) {
 
     const searchParams = useSearchParams();
@@ -70,8 +72,13 @@ export default function SectionCardComp({ data , pagination}: CardProps) {
         console.log('Editar');
     };
 
-    const handleDelete = () => {
-        console.log('Borrar');
+    const handleDelete = async (id: string) => {
+        try {
+            await useServices.deleteCompany(id);
+            alert('Empresa eliminada correctamente');
+        } catch (error) {
+            console.error('Error eliminando empresa:', error);
+        }
     };
 
     console.log(data);
@@ -87,7 +94,7 @@ export default function SectionCardComp({ data , pagination}: CardProps) {
                         location={company.location}
                         contact={company.contact}
                         onClickEdit={handleEdit}
-                        onClickDelete={handleDelete}
+                        onClickDelete={e=>handleDelete(company.id)}
                     />
                 ))}
             </Cards>

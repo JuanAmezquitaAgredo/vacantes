@@ -29,13 +29,11 @@ export class HttpClient {
   }
   
   async delete<T>(url: string): Promise<T> {
-    console.log("DESDE DELETE")
     const headers = await this.getHeader();
     const response = await fetch(`${this.baseUrl}/${url}`, {
       headers: headers,
       method: "DELETE",
     });
-
     return this.handleResponse(response);
   }
 
@@ -59,13 +57,14 @@ export class HttpClient {
 
   private async handleResponse(response: Response) {
     if (!response.ok) {
-
-
       const errorData = await response.json();
       console.log(errorData);
       throw new Error(errorData.message || "Ocurrió un error en la peticion");
     }
-
-    return await response.json();
+    try {
+      return await response.json();
+    } catch {
+      return {};
+    }
   }
 }
