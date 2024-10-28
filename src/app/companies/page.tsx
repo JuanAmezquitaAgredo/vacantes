@@ -11,7 +11,7 @@ interface Iprops{
 const useCompaniesServices = new Service();
 export default async function CompaniesPage({searchParams}: Iprops) {
   const page = searchParams.page? parseInt(searchParams.page.toString()) : 1;
-  const response = await useCompaniesServices.allCompanies({ page, size: 6 });
+  const response = await useCompaniesServices.Companies({ page, size: 6 });
 
   return (
     <>

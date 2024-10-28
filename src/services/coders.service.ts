@@ -1,5 +1,5 @@
 import { ICompanies, IGetCompanyRequest, IGetVacanciesRequest, IVacancyResponse } from "@/models/modelsProgram/program.model";
-import { IPostCompany, IPostCompanyResponse } from "@/models/post/post";
+import { IPostCompany, IPostCompanyResponse, IPostVacancy, IPostVacancyResponse } from "@/models/post/post";
 import { HttpClient } from "@/utils/client-http";
 
 export class  Service {
@@ -9,7 +9,7 @@ export class  Service {
     this.httpClient = new HttpClient();
   }
 
-  async allCompanies({page, size }: IGetCompanyRequest) {
+  async Companies({page, size }: IGetCompanyRequest) {
     try {
       const response = this.httpClient.get<ICompanies>(`company?page=${page}&size=${size}`);
 
@@ -34,6 +34,16 @@ export class  Service {
   async createCompany(company: IPostCompany) {
     try {
       const createdCompany = await this.httpClient.post<IPostCompanyResponse, IPostCompany>("company", company);
+      return createdCompany;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  async createVacant(vacants: IPostVacancy) {
+    try {
+      const createdCompany = await this.httpClient.post<IPostVacancyResponse, IPostVacancy>("vacants", vacants);
       return createdCompany;
     } catch (error) {
       console.log(error);
