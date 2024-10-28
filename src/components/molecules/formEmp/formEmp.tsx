@@ -14,7 +14,9 @@ const StyledForm = styled.form`
     gap: 1rem;
     margin: 0.5rem;
 `;
+
 export default function FormEmp() {
+    const router = useRouter();
     const [company, setCompany] = useState<IPostCompany>({
         name: "",
         location: "",
@@ -22,14 +24,13 @@ export default function FormEmp() {
     });
 
     const useServices = new Service();
-    const router = useRouter();
 
     const handleAdd = async (e: FormEvent<Element>) => {
         e.preventDefault();
         try {
             await useServices.createCompany(company);
-            router.push('/companies');
             alert('Empresa agregada correctamente');
+            router.refresh();
         } catch (error) {
             console.error('Error agregando vacante:', error);
         }

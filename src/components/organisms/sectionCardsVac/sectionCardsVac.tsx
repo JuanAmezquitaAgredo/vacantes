@@ -3,8 +3,6 @@ import ButtonPag from "@/components/atoms/buttonPag/buttonPag";
 import CardVacComponents from "@/components/molecules/cardVac/cardVac";
 import { IPageable, IVacancyResponse } from "@/models/modelsProgram/program.model";
 import { useRouter, useSearchParams } from "next/navigation";
-
-import { useState } from "react";
 import styled from "styled-components";
 
 interface CardProps {
