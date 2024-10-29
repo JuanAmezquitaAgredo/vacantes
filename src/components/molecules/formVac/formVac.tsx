@@ -38,7 +38,7 @@ export default function FormVac({ onClose, initialData }: IFormEmpProps) {
     });
     const optionsStatus = [
         { value: 'ACTIVE', label: 'Active' },
-        { value: 'DISACTIVE', label: 'Disactive' },
+        { value: 'INACTIVE', label: 'Inactive' },
     ]
     const [optionsCompany, setOptionsCompany] = useState<ICompanyOptions[]>([]);
     useEffect(() => {
