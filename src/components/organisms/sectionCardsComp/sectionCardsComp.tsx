@@ -1,9 +1,12 @@
 'use client'
 import ButtonPag from "@/components/atoms/buttonPag/buttonPag";
+import Modal from "@/components/atoms/modal/modal";
 import CardCompComponents from "@/components/molecules/cardCom/cardCom";
-import { ICompanies, IPageable } from "@/models/modelsProgram/program.model";
+import FormEmp from "@/components/molecules/formEmp/formEmp";
+import { ICompanies, ICompany, IPageable } from "@/models/modelsProgram/program.model";
 import { Service } from "@/services/coders.service";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import styled from "styled-components";
 
 interface CardProps {
@@ -51,6 +54,15 @@ export default function SectionCardComp({ data , pagination}: CardProps) {
 
     const searchParams = useSearchParams();
     const router = useRouter();
+    const [ModalOpenEmp, setModalOpenEmp] = useState(false);
+
+    const toggleModalEmp = () => {
+        setModalOpenEmp(!ModalOpenEmp);
+        if (!ModalOpenEmp) {
+            setCompanySelected(undefined);
+        }
+    }
+    const [companySelected, setCompanySelected] = useState<ICompany>();
 
     const HandleClickNext = (nextPage: number) => {
         const params = new URLSearchParams(searchParams.toString());
@@ -68,8 +80,9 @@ export default function SectionCardComp({ data , pagination}: CardProps) {
         }
     };
 
-    const handleEdit = () => {
-        console.log('Editar');
+    const handleEdit = (company: ICompany) => {
+        setCompanySelected(company);
+        toggleModalEmp();
     };
 
     const handleDelete = async (id: string) => {
@@ -90,9 +103,7 @@ export default function SectionCardComp({ data , pagination}: CardProps) {
                 {data.content.map((company) => (
                     <CardCompComponents
                         key={company.id}
-                        title={company.name}
-                        location={company.location}
-                        contact={company.contact}
+                        company={company}
                         onClickEdit={handleEdit}
                         onClickDelete={e=>handleDelete(company.id)}
                     />
@@ -103,6 +114,9 @@ export default function SectionCardComp({ data , pagination}: CardProps) {
                 Página {courrentPage} de {data.totalPages}
                 <ButtonPag label=">" onClick={() => HandleClickNext(courrentPage + 1)} />
             </Pagination>
+            <Modal isOpen={ModalOpenEmp} onClose={toggleModalEmp} title="Editar Compañia">
+                    <FormEmp onClose={toggleModalEmp} initialData={companySelected}/>
+            </Modal>
         </SectionComp>
     );
 }

@@ -1,12 +1,11 @@
 import ButtonsCard from "@/components/atoms/buttonsCard/buttonsCard";
 import InfoCardComp from "@/components/atoms/infoCarCom/infoCardComp";
+import { ICompany } from "@/models/modelsProgram/program.model";
 import styled from "styled-components";
 
 interface ICardProps{
-    title: string;
-    location: string;
-    contact: string;
-    onClickEdit: (e: React.FormEvent) => void;
+    company: ICompany;
+    onClickEdit: (company: ICompany) => void;
     onClickDelete: (e: React.FormEvent) => void;
 }
 
@@ -21,11 +20,11 @@ const Card = styled.div`
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
-export default function CardCompComponents({title, location, contact, onClickEdit, onClickDelete}: ICardProps ){
+export default function CardCompComponents({company, onClickEdit, onClickDelete}: ICardProps ){
     return(
         <Card>
-            <InfoCardComp title={title} location={location} contact={contact}/>
-            <ButtonsCard onClickEdit={onClickEdit} onClickDelete={onClickDelete} color="primary" hoverColor="primary"/>
+            <InfoCardComp title={company.name} location={company.location} contact={company.contact}/>
+            <ButtonsCard onClickEdit={() => onClickEdit(company)} onClickDelete={onClickDelete} color="primary" hoverColor="primary"/>
         </Card>
     )
 };

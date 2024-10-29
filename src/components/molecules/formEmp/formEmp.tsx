@@ -1,10 +1,11 @@
 'use client'
 import InputField from "../inputField/inputField";
 import ButtonComponent from "@/components/atoms/button/button";
+import { ICompany } from "@/models/modelsProgram/program.model";
 import { IPostCompany } from "@/models/post/post";
 import { Service } from "@/services/coders.service";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import styled from "styled-components";
 
 const StyledForm = styled.form`
@@ -17,9 +18,13 @@ const StyledForm = styled.form`
 
 interface IFormEmpProps {
     onClose: () => void;
+    initialData?: ICompany;
+    id?: string;
 }
 
-export default function FormEmp({onClose}:IFormEmpProps){
+const useServices = new Service();
+
+export default function FormEmp({ onClose, initialData }: IFormEmpProps) {
     const router = useRouter();
     const [company, setCompany] = useState<IPostCompany>({
         name: "",
@@ -27,26 +32,61 @@ export default function FormEmp({onClose}:IFormEmpProps){
         contact: ""
     });
 
-    const useServices = new Service();
+    useEffect(() => {
+        if (initialData) {
+            setCompany({...initialData });
+        }
+    }, [initialData]);
 
-    const handleAdd = async (e: FormEvent<Element>) => {
+    const handleSubmit = async (e: FormEvent<Element>) => {
         e.preventDefault();
         try {
-            await useServices.createCompany(company);
-            alert('Empresa agregada correctamente');
+            if (initialData && initialData.id) {
+                await useServices.updateCompany(initialData.id, company);
+                alert('Empresa editada correctamente');
+            } else {
+                await useServices.createCompany(company);
+                alert('Empresa agregada correctamente');
+            }
             onClose();
             router.refresh();
         } catch (error) {
-            console.error('Error agregando vacante:', error);
+            console.error(`Error ${initialData ? 'editando' : 'agregando'} empresa:`, error);
         }
     }
 
     return (
         <StyledForm>
-            <InputField type="text" onChange={(e) => setCompany({ ...company, name: e.target.value })} name="name" value={company.name} focusColor="secondary" label="Nombre" />
-            <InputField type="text" onChange={(e) => setCompany({ ...company, location: e.target.value })} name="location" value={company.location} focusColor="secondary" label="Ubicación" />
-            <InputField type="text" onChange={(e) => setCompany({ ...company, contact: e.target.value })} name="contact" value={company.contact} focusColor="secondary" label="Contacto" />
-            <ButtonComponent label="Agregar" onClick={(e) => handleAdd(e)} color="secondary" hoverColor="secondary" />
+            <InputField 
+                type="text" 
+                onChange={(e) => setCompany({ ...company, name: e.target.value })} 
+                name="name" 
+                value={company.name} 
+                focusColor="secondary" 
+                label="Nombre" 
+            />
+            <InputField 
+                type="text" 
+                onChange={(e) => setCompany({ ...company, location: e.target.value })} 
+                name="location" 
+                value={company.location} 
+                focusColor="secondary" 
+                label="Ubicación" 
+            />
+            <InputField 
+                type="text" 
+                onChange={(e) => setCompany({ ...company, contact: e.target.value })} 
+                name="contact" 
+                value={company.contact} 
+                focusColor="secondary" 
+                label="Contacto" 
+            />
+            <ButtonComponent 
+                onClick={handleSubmit}
+                label={initialData ? "Editar" : "Agregar"} 
+                color="secondary" 
+                hoverColor="secondary" 
+            />
         </StyledForm>
     );
 }
