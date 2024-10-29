@@ -4,6 +4,7 @@ import Modal from "@/components/atoms/modal/modal";
 import CardVacComponents from "@/components/molecules/cardVac/cardVac";
 import FormVac from "@/components/molecules/formVac/formVac";
 import { IPageable, IVacancy, IVacancyResponse } from "@/models/modelsProgram/program.model";
+import { Service } from "@/services/coders.service";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import styled from "styled-components";
@@ -39,6 +40,7 @@ const Pagination = styled.div`
     align-items: center;
 `;
 
+const useServices = new Service();
 export default function SectionCardCav({ data, pagination }: CardProps) {
 
     const searchParams = useSearchParams();
@@ -74,8 +76,14 @@ export default function SectionCardCav({ data, pagination }: CardProps) {
         toggleModalEmp();
     };
 
-    const handleDelete = () => {
-        console.log('Borrar');
+    const handleDelete = async (id: string) => {
+        try {
+            await useServices.deleteVacant(id);
+            alert('Compania eliminada correctamente');
+            router.refresh();
+        } catch (error) {
+            console.error('Error eliminando compania:', error);
+        }
     };
 
     const courrentPage = pagination.pageNumber + 1;
@@ -88,7 +96,7 @@ export default function SectionCardCav({ data, pagination }: CardProps) {
                         key={vacant.id}
                         vacant={vacant}
                         onClickEdit={handleEdit}
-                        onClickDelete={handleDelete}
+                        onClickDelete={e=>handleDelete(vacant.id)}
                     />
                 ))}
             </Cards>

@@ -1,4 +1,4 @@
-import { ICompanies, ICompany, IGetCompanyRequest, IGetVacanciesRequest, IVacancyResponse } from "@/models/modelsProgram/program.model";
+import { ICompanies, ICompany, IGetCompanyRequest, IGetVacanciesRequest, IVacancy, IVacancyResponse } from "@/models/modelsProgram/program.model";
 import { IPostCompany, IPostCompanyResponse, IPostVacancy, IPostVacancyResponse } from "@/models/post/post";
 import { HttpClient } from "@/utils/client-http";
 
@@ -65,6 +65,16 @@ export class  Service {
     try {
       const company = this.httpClient.delete<ICompany>(`company/${id}`);
       return company;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  async deleteVacant(id: string) {
+    try {
+      const vacant = this.httpClient.delete<IVacancy>(`vacants/${id}`);
+      return vacant;
     } catch (error) {
       console.log(error);
       throw error;
