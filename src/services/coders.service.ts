@@ -9,10 +9,9 @@ export class  Service {
     this.httpClient = new HttpClient();
   }
 
-  async Companies({page, size }: IGetCompanyRequest) {
+  async Companies({page, size, name }: IGetCompanyRequest) {
     try {
-      const response = this.httpClient.get<ICompanies>(`company?page=${page}&size=${size}`);
-
+      const response = this.httpClient.get<ICompanies>(`company?page=${page}&size=${size}&name=${name}`);
       return response;
     } catch (error) {
       console.log(error);

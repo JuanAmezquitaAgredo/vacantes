@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const SearchContainer = styled.div`
   display: flex;
@@ -35,19 +36,28 @@ const IconContainer = styled.div`
 
 
 export function SearchComponent() {
-    const [searchTerm, setSearchTerm] = useState('');
+  const searchParams = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState('');
+  const router = useRouter();
 
-    return (
-        <SearchContainer>
-            <IconContainer>
-                <FaSearch />
-            </IconContainer>
-            <SearchInput
-                type="text"
-                placeholder="Buscar..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-            />
-        </SearchContainer>
-    );
+  const handleChange = (searchTerm: string) => {
+    setTimeout(() => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set('name', searchTerm);
+      router.push(`?${params.toString()}`);
+    }, 500);
+  }
+
+  return (
+    <SearchContainer>
+      <IconContainer>
+        <FaSearch />
+      </IconContainer>
+      <SearchInput
+        type="text"
+        placeholder="Buscar..."
+        onChange={(e) => handleChange(e.target.value)}
+      />
+    </SearchContainer>
+  );
 }

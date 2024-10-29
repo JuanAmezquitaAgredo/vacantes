@@ -40,6 +40,7 @@ export interface ICompanies {
 export interface IGetCompanyRequest{
   page: number;
   size: number;
+  name?: string;
 }
 
 export interface IGetVacanciesRequest{

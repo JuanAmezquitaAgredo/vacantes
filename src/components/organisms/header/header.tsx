@@ -8,7 +8,7 @@ const StyleTitle = styled.h1`
     justify-content: center;
     align-items: center;
     font-size: 2rem;
-    background-color: : rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
 `;
 export default function HeaderComponent(){
 
