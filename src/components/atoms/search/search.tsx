@@ -37,7 +37,6 @@ const IconContainer = styled.div`
 
 export function SearchComponent() {
   const searchParams = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
 
   const handleChange = (searchTerm: string) => {

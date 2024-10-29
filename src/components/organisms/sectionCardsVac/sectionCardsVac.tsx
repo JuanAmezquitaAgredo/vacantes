@@ -96,7 +96,7 @@ export default function SectionCardCav({ data, pagination }: CardProps) {
                         key={vacant.id}
                         vacant={vacant}
                         onClickEdit={handleEdit}
-                        onClickDelete={e=>handleDelete(vacant.id)}
+                        onClickDelete={()=>handleDelete(vacant.id)}
                     />
                 ))}
             </Cards>

@@ -105,7 +105,7 @@ export default function SectionCardComp({ data , pagination}: CardProps) {
                         key={company.id}
                         company={company}
                         onClickEdit={handleEdit}
-                        onClickDelete={e=>handleDelete(company.id)}
+                        onClickDelete={()=>handleDelete(company.id)}
                     />
                 ))}
             </Cards>
