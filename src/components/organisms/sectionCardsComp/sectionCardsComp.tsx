@@ -58,7 +58,7 @@ export default function SectionCardComp({ data , pagination}: CardProps) {
 
     const toggleModalEmp = () => {
         setModalOpenEmp(!ModalOpenEmp);
-        if (!ModalOpenEmp) {
+        if (ModalOpenEmp) {
             setCompanySelected(undefined);
         }
     }

@@ -81,5 +81,15 @@ export class  Service {
       throw error;
     }
   }
+
+  async updateVacancy(id: string, vacant: IPostVacancy) {
+    try {
+      const updatedVacancy = await this.httpClient.put<IPostVacancy, IPostVacancy>(`vacants/${id}`, vacant);
+      return updatedVacancy;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
   
 }

@@ -34,7 +34,7 @@ export default function FormEmp({ onClose, initialData }: IFormEmpProps) {
 
     useEffect(() => {
         if (initialData) {
-            setCompany({...initialData });
+            setCompany({...initialData});
         }
     }, [initialData]);
 

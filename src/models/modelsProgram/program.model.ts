@@ -66,7 +66,7 @@ export interface IVacancyResponse{
 }
 
 export interface IVacancy {
-  id: number
+  id: string
   title: string
   description: string
   status: string

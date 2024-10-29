@@ -1,8 +1,11 @@
 'use client'
 import ButtonPag from "@/components/atoms/buttonPag/buttonPag";
+import Modal from "@/components/atoms/modal/modal";
 import CardVacComponents from "@/components/molecules/cardVac/cardVac";
-import { IPageable, IVacancyResponse } from "@/models/modelsProgram/program.model";
+import FormVac from "@/components/molecules/formVac/formVac";
+import { IPageable, IVacancy, IVacancyResponse } from "@/models/modelsProgram/program.model";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import styled from "styled-components";
 
 interface CardProps {
@@ -23,7 +26,7 @@ const Cards = styled.div`
     width: 100%;
     height: 80vh;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     justify-items: center;
     align-items: start;
@@ -40,6 +43,15 @@ export default function SectionCardCav({ data, pagination }: CardProps) {
 
     const searchParams = useSearchParams();
     const router = useRouter();
+    const [ModalOpenEmp, setModalOpenEmp] = useState(false);
+
+    const toggleModalEmp = () => {
+        setModalOpenEmp(!ModalOpenEmp);
+        if (ModalOpenEmp) {
+            setVacancySelected(undefined);
+        }
+    }
+    const [vacancieSelected, setVacancySelected] = useState<IVacancy>();
 
     const HandleClickNext = (nextPage: number) => {
         const params = new URLSearchParams(searchParams.toString());
@@ -57,8 +69,9 @@ export default function SectionCardCav({ data, pagination }: CardProps) {
         }
     };
 
-    const handleEdit = () => {
-        console.log('Editar');
+    const handleEdit = (vacant: IVacancy) => {
+        setVacancySelected(vacant);
+        toggleModalEmp();
     };
 
     const handleDelete = () => {
@@ -73,20 +86,20 @@ export default function SectionCardCav({ data, pagination }: CardProps) {
                 {data.content.map((vacant) => (
                     <CardVacComponents
                         key={vacant.id}
-                        title={vacant.title}
-                        description={vacant.description}
-                        status={vacant.status}
-                        company={vacant.company.name}
+                        vacant={vacant}
                         onClickEdit={handleEdit}
                         onClickDelete={handleDelete}
                     />
                 ))}
             </Cards>
             <Pagination>
-            <ButtonPag label="<" onClick={() => HandleClickBack(courrentPage - 1)} />
+                <ButtonPag label="<" onClick={() => HandleClickBack(courrentPage - 1)} />
                 Página {courrentPage} de {data.totalPages}
                 <ButtonPag label=">" onClick={() => HandleClickNext(courrentPage + 1)} />
             </Pagination>
+            <Modal isOpen={ModalOpenEmp} onClose={toggleModalEmp} title="Editar Compañia">
+                <FormVac onClose={toggleModalEmp} initialData={vacancieSelected} />
+            </Modal>
         </SectionVac>
     );
 }
