@@ -1,6 +1,7 @@
 'use client'
 import { SearchComponent } from "@/components/atoms/search/search";
 import SwitchComponent from "@/components/atoms/switch/switch";
+import { Suspense } from "react";
 import { FaBuilding, FaSuitcase } from "react-icons/fa";
 import styled from "styled-components";
 
@@ -14,8 +15,11 @@ export function NavbarComponent() {
 
     const handleSwitchChange = (selectedIndex: number) => {
         console.log('Switch changed to:', selectedIndex);
-      };
+    };
 
+    function SearchBarFallback() {
+        return <>Loading...</>
+    }
     return (
         <StyledNavbar>
             <SwitchComponent
@@ -25,7 +29,9 @@ export function NavbarComponent() {
                 ]}
                 onChange={handleSwitchChange}
             />
-            <SearchComponent/>
+            <Suspense fallback={<SearchBarFallback />}>
+                <SearchComponent />
+            </Suspense>
         </StyledNavbar>
     );
 }
