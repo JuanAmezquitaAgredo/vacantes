@@ -34,7 +34,7 @@ const Bounce = styled.div`
   }
 `;
 
-function Spinner() {
+function Loading() {
   return (
     <SpinnerWrapper>
       <Bounce />
@@ -43,5 +43,5 @@ function Spinner() {
   );
 }
 
-export default Spinner;
+export default Loading;
 

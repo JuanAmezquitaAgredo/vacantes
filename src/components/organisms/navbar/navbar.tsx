@@ -1,3 +1,4 @@
+'use client'
 import { SearchComponent } from "@/components/atoms/search/search";
 import SwitchComponent from "@/components/atoms/switch/switch";
 import { FaBuilding, FaSuitcase } from "react-icons/fa";

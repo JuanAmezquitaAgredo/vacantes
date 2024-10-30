@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface SwitchProps {
@@ -40,24 +40,26 @@ export default function SwitchComponent({ options, onChange }: SwitchProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
 
+  useEffect(() => {
+    if (selectedIndex === 0) {
+      router.push('/');
+    } else if (selectedIndex === 1) {
+      router.push('/companies');
+    }
+  }, [selectedIndex, router]);
+
   const handleClick = (index: number) => {
     setSelectedIndex(index);
     onChange(index);
   };
 
-  if(selectedIndex === 0){
-    router.push('/');
-  } else if(selectedIndex === 1){
-    router.push('/companies');
-  }
-  
   return (
     <SwitchContainer>
       {options.map((option, index) => (
         <SwitchButton
           key={index}
           isActive={index === selectedIndex}
-          isLeft={index === 0} 
+          isLeft={index === 0}
           onClick={() => handleClick(index)}
         >
           {option.icon}
